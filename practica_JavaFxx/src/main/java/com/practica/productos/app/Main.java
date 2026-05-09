@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,7 +16,8 @@ public class Main extends Application{
 public void start(Stage stage) {
 TextField campo = new TextField();
 Button boton = new Button("Mostrar");
-Label label = new Label();
+TextArea area = new TextArea();
+area.setEditable(false);
 ProductoService servicio = new ProductoService();
 boton.setOnAction(e -> {
     servicio.agregar(new Producto(campo.getText()));
@@ -25,12 +27,12 @@ texto += p.getNombre() + "\n";
 }
 try {
     Producto p = new Producto(campo.getText());
-    label.setText(p.getNombre());
+    area.setText(p.getNombre());
 } catch (Exception ex) {
-    label.setText(ex.getMessage());
+    area.setText(ex.getMessage());
 }
 });
-VBox layout = new VBox(10, campo, boton, label);
+VBox layout = new VBox(10, campo, boton, area);
 Scene scene = new Scene(layout, 300, 200);
 stage.setScene(scene);
 stage.show();
